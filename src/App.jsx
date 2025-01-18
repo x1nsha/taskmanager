@@ -3,6 +3,9 @@
     import HomePage from './pages/HomePage';
     import TaskDetailPage from './components/TaskDetail';
     import TaskEditPage from './components/TaskEditForm';
+    import TaskList from "./components/TaskList";
+    import TaskDetail from "./components/TaskDetail";
+    import TaskEditForm from "./components/TaskEditForm";
 
     const initialState = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -53,12 +56,15 @@
                     <div className="sidebar">
                         <Routes>
                             <Route path="/" element={<HomePage tasks={filteredTasks} dispatch={dispatch} setFilter={setFilter}/>}/>
+                            <Route path="/*" element={<TaskList />} />
                         </Routes>
                     </div>
                     <div className="content">
                         <Routes>
                             <Route path="/:taskId" element={<TaskDetailPage tasks={tasks}/>}/>
                             <Route path="/:taskId/edit" element={<TaskEditPage tasks={tasks} dispatch={dispatch}/>}/>
+                            <Route path="/:taskId" element={<TaskDetail />} />
+                            <Route path="/:taskId/edit" element={<TaskEditForm />} />
                         </Routes>
                     </div>
                 </div>

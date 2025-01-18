@@ -7,12 +7,17 @@ const TaskDetail = () =>
     const { taskId } = useParams();
     const task = useSelector((state) => state.tasks.find((t) => t.id === parseInt(taskId)));
 
-    if (!task) return <div>Task has not found!</div>;
-
     return (
-        <div>
-            <h2>{task.title}</h2>
-            <p>{task.description}</p>
+        <div className="task-details">
+            {task ? (
+                <>
+                    <h2>{task.title}</h2>
+
+                    <p>{task.description}</p>
+                </>
+            ) : (
+                <p>Select a task to view details.</p>
+            )}
         </div>
     );
 };
