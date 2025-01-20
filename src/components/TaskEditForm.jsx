@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { editTask } from '../features/tasks/tasksSlice';
@@ -11,6 +11,15 @@ const TaskEditForm = () =>
     const [description, setDescription] = useState(task?.description || '');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() =>
+    {
+        if (task)
+        {
+            setTitle(task.title);
+            setDescription(task.description);
+        }
+    }, [task]);
 
     const handleSubmit = (e) =>
     {
