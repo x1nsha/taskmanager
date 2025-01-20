@@ -7,17 +7,26 @@ const TaskEditForm = () =>
 {
     const { taskId } = useParams();
     const task = useSelector((state) => state.tasks.find((t) => t.id === parseInt(taskId)));
-    const [title, setTitle] = useState(task.title);
-    const [description, setDescription] = useState(task.description);
+    const [title, setTitle] = useState(task?.title || '');
+    const [description, setDescription] = useState(task?.description || '');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSubmit = (e) =>
     {
         e.preventDefault();
-        dispatch(editTask({ id: task.id, title, description }));
+
+        if (task)
+        {
+            dispatch(editTask({ id: task.id, title, description }));
+        }
         navigate('/');
     };
+
+    if (!task)
+    {
+        navigate('/');
+    }
 
     return (
         <form onSubmit={handleSubmit}>
