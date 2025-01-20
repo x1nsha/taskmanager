@@ -20,8 +20,8 @@ const TaskList = () => {
             (filter === 'incomplete' && !task.completed) ||
             filter === 'all';
 
-        const matchesSearch = task.title.toLowerCase().includes(searchTerm) ||
-            task.description.toLowerCase().includes(searchTerm);
+        const matchesSearch = task.title?.toLowerCase().includes(searchTerm) ||
+            task.description?.toLowerCase().includes(searchTerm);
 
         return matchesFilter && matchesSearch;
     });
